@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.loginapp"
-    compileSdkPreview = "com.example.mealrecipeapp"
+    compileSdkPreview = "UpsideDownCakePrivacySandbox"
 
     defaultConfig {
         applicationId = "com.example.loginapp"
