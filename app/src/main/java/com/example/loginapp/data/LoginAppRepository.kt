@@ -13,6 +13,8 @@ class LoginAppRepository(private val context: Context) {
 
     suspend fun postDataLogin(userData: UserData) = apiService.postDataLogin(userData)
 
+    suspend fun getListUser(page: Int) = apiService.getListUser(2)
+
     fun saveTokenData(token: String){
         sharedPreferencesManager.saveTokenData(token)
     }

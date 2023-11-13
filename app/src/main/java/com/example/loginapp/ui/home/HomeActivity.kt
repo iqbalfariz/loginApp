@@ -1,15 +1,11 @@
-package com.example.loginapp.ui
+package com.example.loginapp.ui.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import com.example.loginapp.R
 import com.example.loginapp.data.LoginAppRepository
 import com.example.loginapp.databinding.ActivityHomeBinding
-import com.example.loginapp.databinding.ActivityMainBinding
 import com.example.loginapp.viewmodel.HomeViewModel
-import com.example.loginapp.viewmodel.MainViewModel
 import com.example.loginapp.viewmodel.ViewModelFactory
 
 class HomeActivity : AppCompatActivity() {
