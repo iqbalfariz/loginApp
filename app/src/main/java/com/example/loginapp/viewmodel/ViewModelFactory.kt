@@ -9,6 +9,8 @@ class ViewModelFactory (private val repository: LoginAppRepository): ViewModelPr
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)){
             return MainViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(HomeViewModel::class.java)){
+            return HomeViewModel(repository) as T
         }
         throw IllegalArgumentException("ViewModel Not Found")
     }

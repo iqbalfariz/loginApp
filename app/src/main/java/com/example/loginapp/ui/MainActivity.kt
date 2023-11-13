@@ -1,7 +1,9 @@
 package com.example.loginapp.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.loginapp.R
 import com.example.loginapp.data.LoginAppRepository
@@ -20,18 +22,36 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        viewModelFactory = ViewModelFactory(LoginAppRepository())
+        viewModelFactory = ViewModelFactory(LoginAppRepository(this))
         mainViewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
-        binding.btnLogin.setOnClickListener {
-            val email = binding.etEmail.text.toString()
-            val password = binding.etPassword.text.toString()
-            sendDataLogin(email, password)
+        if (mainViewModel.isUserLoggedIn()){
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            binding.btnLogin.setOnClickListener {
+                val email = binding.etEmail.text.toString()
+                val password = binding.etPassword.text.toString()
+                sendDataLogin(email, password)
+            }
         }
 
         mainViewModel.responseDataLogin.observe(this){
             println("result post : $it")
+            if (it != null){
+                mainViewModel.saveTokenData(it.token)
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.putExtra(HomeActivity.DATA_TOKEN, it.token)
+                startActivity(intent)
+                finish()
+                Toast.makeText(applicationContext, "Selamat kamu berhasil login", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, "Data yang kamu masukkan salah", Toast.LENGTH_LONG).show()
+            }
         }
+
+
     }
 
     private fun sendDataLogin(email: String, password: String) {

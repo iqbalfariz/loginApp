@@ -17,4 +17,13 @@ class MainViewModel(private val repository: LoginAppRepository): ViewModel() {
         }
     }
 
+    fun saveTokenData(token: String){
+            repository.saveTokenData(token)
+    }
+
+    fun isUserLoggedIn(): Boolean {
+        val tokenData = repository.getTokenData()
+        return tokenData != null
+    }
+
 }
